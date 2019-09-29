@@ -8,15 +8,21 @@ class Search extends Component {
 
   static propTypes = {
     searchTerm: PropTypes.func.isRequired,
-    clearHandler: PropTypes.func.isRequired
+    clearHandler: PropTypes.func.isRequired,
+    setAlert: PropTypes.func
   };
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.searchTerm(this.state.term);
-    this.setState({
-      term: ""
-    });
+    if (this.state.term) {
+      this.props.searchTerm(this.state.term);
+      this.setState({
+        term: ""
+      });
+    } else {
+      console.log("Alert!");
+      this.props.setAlert("Kindly Enter something!", "light");
+    }
   };
 
   changeInputHandler = e => {
